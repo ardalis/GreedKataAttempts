@@ -54,9 +54,19 @@ namespace GreedKataAttempt1
         [InlineData(1000, 1, 1, 1)]
         [InlineData(1000, 1, 1, 1, 6)]
         [InlineData(1050, 1, 1, 1, 5)]
-        public void ReturnsTripleOneScoreGivenThreeOnesAndOtherValues(int expectedValue, params int[] ones)
+        public void ReturnsTripleOneScoreGivenThreeOnesAndOtherValues(int expectedValue, params int[] dieValues)
         {
-            var result = _scorer.ScoreRoll(ones);
+            var result = _scorer.ScoreRoll(dieValues);
+
+            result.Should().Be(expectedValue);
+        }
+
+        [Theory]
+        [InlineData(200, 2, 2, 2)]
+        [InlineData(300, 3, 3, 3)]
+        public void ReturnsTripleValueGivenThreeTwosThroughSixes(int expectedValue, params int[] dieValues)
+        {
+            var result = _scorer.ScoreRoll(dieValues);
 
             result.Should().Be(expectedValue);
         }
