@@ -49,5 +49,17 @@ namespace GreedKataAttempt1
 
             result.Should().Be(0);
         }
+
+        [Theory]
+        [InlineData(1000, 1, 1, 1)]
+        [InlineData(1000, 1, 1, 1, 6)]
+        [InlineData(1050, 1, 1, 1, 5)]
+        public void ReturnsTripleOneScoreGivenThreeOnesAndOtherValues(int expectedValue, params int[] ones)
+        {
+            var result = _scorer.ScoreRoll(ones);
+
+            result.Should().Be(expectedValue);
+        }
+
     }
 }
