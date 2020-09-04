@@ -85,6 +85,16 @@ namespace GreedKataAttempt1
             result.Should().Be(expectedValue);
         }
 
+        [Theory]
+        [InlineData(500, 2, 2, 2, 3, 3, 3)]
+        [InlineData(1200, 2, 2, 2, 1, 1, 1)]
+        public void ReturnsExpectedScoreGivenTwoTriples(int expectedValue, params int[] dieValues)
+        {
+            var result = _scorer.ScoreRoll(dieValues);
+
+            result.Should().Be(expectedValue);
+        }
+
 
     }
 }
