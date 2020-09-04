@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace GreedKataAttempt1
@@ -11,6 +12,8 @@ namespace GreedKataAttempt1
         {
             LoadDieValueCounts(dieValues);
             int score = 0;
+
+            score += ScoreStraight();
 
             score += ScoreQuadOneValue();
 
@@ -30,6 +33,18 @@ namespace GreedKataAttempt1
             score += ScoreSingleFiveValues();
 
             return score;
+        }
+
+        private int ScoreStraight()
+        {
+            if(_dieValueCounts.Values.All(d => d == 1))
+            {
+                for (int i = 1; i <= 6; i++)
+                {
+                    _dieValueCounts[i] -= 1;
+                }
+                return 1200;
+            }
         }
 
         private void LoadDieValueCounts(int[] dieValues)
