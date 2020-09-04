@@ -8,26 +8,24 @@ namespace GreedKataAttempt1
     {
         private GreedScorer _scorer = new GreedScorer();
 
-        [Fact]
-        public void Returns100GivenSingleOne()
+        [Theory]
+        [InlineData(100, 1)]
+        [InlineData(200, 1, 1)]
+        public void Returns100PerOneFewerThanThree(int expectedValue, params int[] ones)
         {
-            var result = _scorer.ScoreRoll(1);
+            var result = _scorer.ScoreRoll(ones);
 
-            result.Should().Be(100);
+            result.Should().Be(expectedValue);
         }
-        [Fact]
-        public void Returns50GivenSingleFive()
-        {
-            var result = _scorer.ScoreRoll(5);
 
-            result.Should().Be(50);
-        }
-        [Fact]
-        public void Returns200GivenTwoOnes()
+        [Theory]
+        [InlineData(50, 5)]
+        [InlineData(100, 5, 5)]
+        public void Returns50PerFiveFewerThanThree(int expectedValue, params int[] fives)
         {
-            var result = _scorer.ScoreRoll(1, 1);
+            var result = _scorer.ScoreRoll(fives);
 
-            result.Should().Be(200);
+            result.Should().Be(expectedValue);
         }
 
         [Theory]
