@@ -29,6 +29,16 @@ namespace GreedKataAttempt1
         }
 
         [Theory]
+        [InlineData(1, 5)]
+        [InlineData(5, 1)]
+        public void Returns150GivenOneAndFive(params int[] dieValues)
+        {
+            var result = _scorer.ScoreRoll(dieValues);
+
+            result.Should().Be(150);
+        }
+
+        [Theory]
         [InlineData(2)]
         [InlineData(3)]
         [InlineData(4)]
