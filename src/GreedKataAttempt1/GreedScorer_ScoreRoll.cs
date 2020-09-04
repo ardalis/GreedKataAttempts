@@ -64,6 +64,9 @@ namespace GreedKataAttempt1
         [Theory]
         [InlineData(200, 2, 2, 2)]
         [InlineData(300, 3, 3, 3)]
+        [InlineData(400, 4, 4, 4)]
+        [InlineData(500, 5, 5, 5)]
+        [InlineData(600, 6, 6, 6)]
         public void ReturnsTripleValueGivenThreeTwosThroughSixes(int expectedValue, params int[] dieValues)
         {
             var result = _scorer.ScoreRoll(dieValues);
