@@ -9,45 +9,63 @@ namespace GreedKataAttempt1
 
         public int ScoreRoll(params int[] dieValues)
         {
-            for (int i = 1; i <= 6; i++)
-            {
-                _dieValueCounts.Add(i, dieValues.Count(die => die == i));
-            }
+            LoadDieValueCounts(dieValues);
             int score = 0;
 
-            if (_dieValueCounts[1] >= 3)
-            {
-                score += 1000;
-                _dieValueCounts[1] -= 3;
-            }
-            if (_dieValueCounts[1] > 0)
-            {
-                score += _dieValueCounts[1] * 100;
-            }
+            score += ScoreTripleOneValue();
 
             for (int dieValue = 2; dieValue <= 6; dieValue++)
             {
-                score += ScoreTripleDieValue(dieValue, _dieValueCounts[dieValue]);
+                score += ScoreTripleDieValue(dieValue);
             }
-            
-            if (_dieValueCounts[5] > 0)
-            {
-                score += _dieValueCounts[5] * 50;
-            }
+
+            score += ScoreSingleOneValues();
+            score += ScoreSingleFiveValues();
 
             return score;
         }
 
-        private int ScoreTripleDieValue(int dieValue, int count)
+        private void LoadDieValueCounts(int[] dieValues)
         {
-            if (count >= 3)
+            for (int i = 1; i <= 6; i++)
+            {
+                _dieValueCounts.Add(i, dieValues.Count(die => die == i));
+            }
+        }
+
+        private int ScoreTripleOneValue()
+        {
+            if (_dieValueCounts[1] >= 3)
+            {
+                _dieValueCounts[1] -= 3;
+                return 1000;
+            }
+            return 0;
+        }
+
+        private int ScoreTripleDieValue(int dieValue)
+        {
+            if (_dieValueCounts[dieValue] >= 3)
             {
                 _dieValueCounts[dieValue] -= 3;
                 return dieValue * 100;
-
             }
 
             return 0;
+        }
+
+        private int ScoreSingleOneValues()
+        {
+            int score = _dieValueCounts[1] * 100;
+            _dieValueCounts[1] = 0;
+            return score;
+        }
+
+        private int ScoreSingleFiveValues()
+        {
+            int score = _dieValueCounts[5] * 50;
+            _dieValueCounts[1] = 0;
+            return score;
         }
     }
 }
