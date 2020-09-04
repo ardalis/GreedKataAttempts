@@ -12,6 +12,13 @@ namespace GreedKataAttempt1
             LoadDieValueCounts(dieValues);
             int score = 0;
 
+            score += ScoreQuadOneValue();
+
+            for (int dieValue = 2; dieValue <= 6; dieValue++)
+            {
+                score += ScoreQuadDieValue(dieValue);
+            }
+
             score += ScoreTripleOneValue();
 
             for (int dieValue = 2; dieValue <= 6; dieValue++)
@@ -43,6 +50,26 @@ namespace GreedKataAttempt1
             return 0;
         }
 
+        private int ScoreQuadOneValue()
+        {
+            if (_dieValueCounts[1] >= 4)
+            {
+                _dieValueCounts[1] -= 4;
+                return 2000;
+            }
+            return 0;
+        }
+
+        private int ScoreQuadDieValue(int dieValue)
+        {
+            if (_dieValueCounts[dieValue] >= 4)
+            {
+                _dieValueCounts[dieValue] -= 4;
+                return dieValue * 200;
+            }
+
+            return 0;
+        }
         private int ScoreTripleDieValue(int dieValue)
         {
             if (_dieValueCounts[dieValue] >= 3)

@@ -75,7 +75,7 @@ namespace GreedKataAttempt1
         }
 
         [Theory]
-        [InlineData(1150, 1, 1, 1, 5, 1)]
+        [InlineData(2050, 1, 1, 1, 5, 1)] // changes when 4 of a kind added
         [InlineData(0, 2, 3, 4, 6, 2)]
         [InlineData(350, 3, 4, 5, 3, 3)]
         public void ReturnsExpectedValueFromSampleScoresGiven(int expectedValue, params int[] dieValues)
@@ -89,6 +89,17 @@ namespace GreedKataAttempt1
         [InlineData(500, 2, 2, 2, 3, 3, 3)]
         [InlineData(1200, 2, 2, 2, 1, 1, 1)]
         public void ReturnsExpectedScoreGivenTwoTriples(int expectedValue, params int[] dieValues)
+        {
+            var result = _scorer.ScoreRoll(dieValues);
+
+            result.Should().Be(expectedValue);
+        }
+
+        [Theory]
+        [InlineData(2000, 1, 1, 1, 1, 3, 3)]
+        [InlineData(400, 2, 2, 2, 2, 3, 3)]
+        [InlineData(600, 3, 3, 3, 3, 4, 4)]
+        public void ReturnsExpectedScoreGivenFourOfAKind(int expectedValue, params int[] dieValues)
         {
             var result = _scorer.ScoreRoll(dieValues);
 
