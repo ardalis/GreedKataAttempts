@@ -15,7 +15,7 @@ namespace GreedKataAttempt1
             }
             int score = 0;
 
-            if (_dieValueCounts[1] == 3)
+            if (_dieValueCounts[1] >= 3)
             {
                 score += 1000;
                 _dieValueCounts[1] -= 3;
@@ -40,7 +40,7 @@ namespace GreedKataAttempt1
 
         private int ScoreTripleDieValue(int dieValue, int count)
         {
-            if (count == 3)
+            if (count >= 3)
             {
                 _dieValueCounts[dieValue] -= 3;
                 return dieValue * 100;
